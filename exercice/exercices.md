@@ -18,9 +18,59 @@ Utiliser le solveur en ligne :
 
 👉 https://potassco.org/clingo/run/
 
-Note :
-* les blocs `text` sont du pseudo-code
-* les blocs `prolog` sont de la syntaxe ASP exécutable
+### Modes de raisonnement (à connaître)
+
+Dans le solveur en ligne, vous pouvez changer le mode de raisonnement.
+
+Exemple minimal :
+
+```prolog
+a :- not b.
+b :- not a.
+
+#show a/0.
+#show b/0.
+```
+
+Ce programme a deux answer sets possibles : `{a}` et `{b}`.
+
+* `default` : retourne un answer set (souvent le premier trouvé).
+* `enumerate all` : retourne tous les answer sets (`{a}` et `{b}`).
+* `cautious` : garde seulement ce qui est vrai dans tous les answer sets (ici : rien).
+* `brave` : garde ce qui est vrai dans au moins un answer set (ici : `a` et `b`).
+
+Lecture rapide :
+
+* `cautious` = intersection des solutions
+* `brave` = union des solutions
+
+### Directives Clingo utiles
+
+Certaines lignes commencent par `#` : ce sont des directives du solveur.
+
+Syntaxes générales :
+
+```prolog
+#const nom = valeur.
+#show predicat/arite.
+#show terme : condition.
+```
+
+Exemple :
+
+```prolog
+#const n = 3.
+person(1..n).
+{selected(X)} :- person(X).
+
+#show selected/1.
+```
+
+À retenir :
+
+* `#const` sert à paramétrer un programme sans réécrire toutes les règles.
+* `#show` sert à contrôler ce qui est affiché dans la sortie.
+
 
 
 

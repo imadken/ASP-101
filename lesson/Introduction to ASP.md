@@ -52,17 +52,21 @@ ASP est plus adapté aux **problèmes combinatoires et de recherche**.
 
 **Idée clé :** Prolog explore un **arbre de preuves** (goal-directed), alors qu’ASP explore l’**espace global des modèles** (solution-directed).
 
-| Prolog (preuve / backtracking) | ASP (modèles / contraintes) |
-|---|---|
-| ```text
+### Prolog (preuve / backtracking)
+
+```text
 Requête Q
 ├─ règle 1 → sous-buts
 │  ├─ règle 1.1 → ...
 │  └─ règle 1.2 → ...
 └─ règle 2 → sous-buts
-   └─ ...
+    └─ ...
 ↺ backtracking si échec
-``` | ```text
+```
+
+### ASP (modèles / contraintes)
+
+```text
 Programme ASP
 ├─ Candidat M1 = {…}
 ├─ Candidat M2 = {…}
@@ -70,7 +74,7 @@ Programme ASP
 └─ Candidat M4 = {…}
 ↓ filtrage par contraintes
 Answer Sets (solutions)
-``` |
+```
 
 **Lecture rapide :**
 * Prolog : on **cherche une preuve** pour une requête donnée.
@@ -177,8 +181,7 @@ ASP fonctionne souvent en deux phases :
 #### - Éliminer celles qui ne respectent pas les contraintes
 
 
-# 9.1 Slide — Generate / Constrain / Solve (ultra clair)
-
+# 9.1 Generate / Constrain / Solve
 ```text
 Generate → Constrain → Solve
 ```
@@ -187,7 +190,7 @@ Generate → Constrain → Solve
 |---|---|---|
 | Définir l’espace des possibilités (faits + choix). | Enlever les candidats qui violent les règles. | Garder uniquement les answer sets. |
 
-**Mnémo :** on *produit*, on *filtre*, on *garde*.
+on *produit*, on *filtre*, on *garde*.
 
 
 
@@ -236,6 +239,14 @@ Cela signifie :
 # 12. Cardinalité
 
 ASP permet d’exprimer des contraintes numériques.
+
+Syntaxe générale :
+
+```prolog
+L { atom1; atom2; ...; atomN } U.
+```
+
+où `L` est la borne minimale et `U` la borne maximale du nombre d’atomes vrais.
 
 Exemple :
 
@@ -707,6 +718,34 @@ Commande typique :
 clingo program.lp
 ```
 
+## 19.1 Mini-syntaxe Clingo (directives utiles)
+
+En plus des règles ASP, Clingo fournit des directives qui commencent par `#`.
+
+Syntaxes générales :
+
+```prolog
+#const nom = valeur.
+#show predicat/arite.
+#show terme : condition.
+```
+
+Exemple :
+
+```prolog
+#const n = 3.
+num(1..n).
+{choose(X)} :- num(X).
+
+#show choose/1.
+```
+
+Lecture :
+
+* `#const` définit une constante globale (pratique pour paramétrer un modèle).
+* `#show predicat/arite` limite l’affichage aux atomes utiles.
+* `#show terme : condition` affiche un terme seulement si la condition est vraie.
+
 
 # 20. Différences clés avec Prolog
 
@@ -734,4 +773,3 @@ ASP repose sur :
 * la sémantique des modèles stables
 
 C’est un paradigme puissant pour résoudre des problèmes complexes de manière déclarative.
-
