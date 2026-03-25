@@ -19,10 +19,6 @@ If you prefer a local executable, install Clingo and run:
 clingo program.lp
 ```
 
-**Document conventions**
-- `text` blocks are pseudo-code
-- `prolog` blocks are executable ASP syntax
-
 **Learning goals**
 - Understand declarative logic in ASP
 - Model combinatorial problems
