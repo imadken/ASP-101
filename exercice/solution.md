@@ -393,6 +393,15 @@ col(1..N) :- n(N).
    |R1 - R2| == |C1 - C2|.
 ```
 
+Vous pouvez aussi remplacer les trois premieres lignes par:
+```prolog
+#const n=8.
+row(1..n).
+col(1..n). 
+```
+
+et ajouter ```#show queen/2.``` a la fin pour afficher que les positions des reines.
+
 ## Explication détaillée
 
 ### Taille de l’échiquier
