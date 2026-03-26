@@ -262,6 +262,7 @@ a --- b --- c
 
 * Le nombre de solutions change-t-il ?
 * Pourquoi ?
+* Essayez d'augmenter le nombre de nœuds pour voir si cela fonctionne quand vous pouvez utiliser la même couleur pour les nœuds non connectés
 
 
 # Étape 8 – Problème combinatoire (N-Queens)
